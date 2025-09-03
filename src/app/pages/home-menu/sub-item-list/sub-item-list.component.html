@@ -1,0 +1,70 @@
+<div class="mx-auto h-screen w-3/4 py-18 flex flex-col gap-6 text-(--mat-sys-primary)">
+    <div class="flex-1">
+        <mat-tree #tree [dataSource]="dataSource" [childrenAccessor]="childrenAccessor" class="!flex flex-col">
+
+            <!-- Nó folha -->
+            <mat-tree-node *matTreeNodeDef="let node; let level = level" matTreeNodePadding [ngClass]="{
+            'border-b border-(--mat-sys-primary)': level === 0,
+            '!min-h-[68px]' : level ===0,
+            'bg-(--mat-sys-surface-dim)': level === 1 && node.localIndex % 2 == 0,
+            'bg-(--mat-sys-surface-bright)': level === 1 && node.localIndex % 2 != 0
+            }">
+                <div class="w-full flex justify-between items-center">
+                    <span [class]="{'font-medium': level === 0, 'text-xl': level === 0}">
+                        @if(level === 0 && node.price) {<span class="text-(--mat-sys-primary)">{{node.price |
+                            currency}}</span> - }
+                        {{node.name}}
+
+                    </span>
+                    <div class="flex items-center gap-2">
+                        <button matIconButton class="!text-(--mat-sys-primary)" (click)="decrease(node)">
+                            <mat-icon fontIcon="remove"></mat-icon>
+                        </button>
+
+                        <input [value]="node.quantity" disabled tabindex="-1"
+                            class="border rounded border-(--mat-sys-primary) text-(--mat-sys-outline) !bg-(--mat-sys-surface) p-2 !w-[48px]"
+                            matInput type="number">
+
+                        <button matIconButton class="!text-(--mat-sys-primary)" (click)="increase(node)">
+                            <mat-icon fontIcon="add"></mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </mat-tree-node>
+
+            <!-- Nó expansível -->
+            <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding matTreeNodeToggle
+                [cdkTreeNodeTypeaheadLabel]="node.name"
+                class="w-full border-b border-(--mat-sys-primary) flex justify-between !min-h-[68px]">
+                <span class="text-xl font-medium">
+                    <span class="text-(--mat-sys-primary)">{{node.price | currency}}</span> - {{node.name}}
+                </span>
+                <div class="flex items-center gap-2">
+                    <span class="font-thin text-xs text-(--mat-sys-outline) italic ml-1">
+                        {{tree.isExpanded(node) ? 'toque para recolher' : 'toque para expandir'}}
+                    </span>
+                    <button matIconButton matTreeNodeToggle>
+                        <mat-icon class="mat-icon-rtl-mirror !text-(--mat-sys-primary)">
+                            {{tree.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                        </mat-icon>
+                    </button>
+                </div>
+            </mat-tree-node>
+        </mat-tree>
+    </div>
+
+    <div class="flex w-full justify-end gap-4">
+
+        <button matFab extended (click)="handleClear()"
+            class="!rounded-xl !bg-(--mat-sys-error) !text-(--mat-sys-on-error)">
+            <mat-icon>block</mat-icon>
+            Limpar
+        </button>
+        <button [disabled]="total === 0" matFab extended (click)="handleConfirm()"
+            class="!transition-all !delay-150 !rounded-xl !bg-green-600 !text-lime-100 disabled:!bg-(--mat-sys-outline-variant) disabled:!text-(--mat-sys-on-secondary)">
+            <mat-icon>check</mat-icon>
+            Confirmar
+        </button>
+    </div>
+</div>
+<back-button url="menu"></back-button>

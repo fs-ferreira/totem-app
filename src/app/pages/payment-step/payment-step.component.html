@@ -1,0 +1,14 @@
+@if (!hasPaymentFinished) {
+<div class="w-screen h-screen flex items-center justify-center flex-col !text-(--mat-sys-primary) gap-4">
+    <mat-icon class="transition-all animate-spin !size-[120px] !text-[120px]">autorenew</mat-icon>
+    <h1 class="text-2xl font-bold transition-all animate-pulse">Aguradando pagamento...</h1>
+</div>
+} @else {
+<div class="w-screen h-screen flex items-center justify-center flex-col !text-(--mat-sys-primary) gap-4">
+    <div class="flex flex-col gap-2 items-center">
+        <h1 class="text-5xl font-bold">Pronto!</h1>
+        <span class="text-lg font-normal">Estamos imprimindo seus tickets...</span>
+    </div>
+    <mat-icon class="!size-[120px] !text-[120px]">check</mat-icon>
+</div>
+}

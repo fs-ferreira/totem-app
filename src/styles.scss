@@ -1,0 +1,119 @@
+
+
+@use '@angular/material' as mat;
+
+@import "tailwindcss";
+
+:root, .light, .light-theme {
+  --blue-1: #f5f6f8;
+  --blue-2: #eef2f8;
+  --blue-3: #e2eaf8;
+  --blue-4: #d4e3fb;
+  --blue-5: #c3d8fb;
+  --blue-6: #afcbf7;
+  --blue-7: #96b8f1;
+  --blue-8: #72a0eb;
+  --blue-9: #3b82f6;
+  --blue-10: #2e75e8;
+  --blue-11: #1a63d4;
+  --blue-12: #123164;
+
+  --blue-a1: #f58c0007;
+  --blue-a2: #161a2008;
+  --blue-a3: #033aa614;
+  --blue-a4: #0559e223;
+  --blue-a5: #055bec35;
+  --blue-a6: #0159e449;
+  --blue-a7: #0152db63;
+  --blue-a8: #0254da89;
+  --blue-a9: #005cf3c2;
+  --blue-a10: #0157e3d0;
+  --blue-a11: #0052cfe4;
+  --blue-a12: #012158ed;
+
+  --blue-contrast: #fff;
+  --blue-surface: #ecf0f6cc;
+  --blue-indicator: #3b82f6;
+  --blue-track: #3b82f6;
+}
+
+@supports (color: color(display-p3 1 1 1)) {
+  @media (color-gamut: p3) {
+    :root, .light, .light-theme {
+      --blue-1: oklch(97.2% 0.0032 259.8);
+      --blue-2: oklch(95.9% 0.0096 259.8);
+      --blue-3: oklch(93.6% 0.0199 259.8);
+      --blue-4: oklch(91.2% 0.0373 259.8);
+      --blue-5: oklch(87.9% 0.054 259.8);
+      --blue-6: oklch(83.5% 0.0697 259.8);
+      --blue-7: oklch(77.9% 0.0894 259.8);
+      --blue-8: oklch(70.4% 0.1221 259.8);
+      --blue-9: oklch(62.3% 0.188 259.8);
+      --blue-10: oklch(58.2% 0.188 259.8);
+      --blue-11: oklch(52.4% 0.188 259.8);
+      --blue-12: oklch(32.3% 0.0976 259.8);
+
+      --blue-a1: color(display-p3 0.8039 0.4863 0.0196 / 0.024);
+      --blue-a2: color(display-p3 0.0196 0.0314 0.051 / 0.029);
+      --blue-a3: color(display-p3 0.0118 0.2235 0.6471 / 0.078);
+      --blue-a4: color(display-p3 0.0078 0.298 0.8431 / 0.127);
+      --blue-a5: color(display-p3 0.0078 0.2824 0.8745 / 0.192);
+      --blue-a6: color(display-p3 0.0039 0.2941 0.8353 / 0.269);
+      --blue-a7: color(display-p3 0.0039 0.2627 0.8039 / 0.362);
+      --blue-a8: color(display-p3 0.0039 0.2667 0.8 / 0.496);
+      --blue-a9: color(display-p3 0 0.2824 0.902 / 0.683);
+      --blue-a10: color(display-p3 0 0.2588 0.8353 / 0.732);
+      --blue-a11: color(display-p3 0 0.2353 0.7529 / 0.801);
+      --blue-a12: color(display-p3 0 0.098 0.3059 / 0.895);
+
+      --blue-contrast: #fff;
+      --blue-surface: color(display-p3 0.9255 0.9412 0.9608 / 0.8);
+      --blue-indicator: oklch(62.3% 0.188 259.8);
+      --blue-track: oklch(62.3% 0.188 259.8);
+    }
+  }
+}
+
+html {
+  @include mat.theme((
+    color: (
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
+
+
+  
+
+  @include mat.theme-overrides((
+    primary: var(--blue-track),
+    on-primary: var(--blue-contrast),
+    body-medium: 500 1.15rem/1.3rem Arial,
+    corner-large: 32px,
+    level3: 0 4px 6px 1px var(--mat-sys-surface-dim),
+  ));
+  
+}
+
+body {
+  // Default the application to a light color theme. This can be changed to
+  // `dark` to enable the dark color theme, or to `light dark` to defer to the
+  // user's system settings.
+  color-scheme: light;
+
+  // Set a default background, font and text colors for the application using
+  // Angular Material's system-level CSS variables. Learn more about these
+  // variables at https://material.angular.dev/guide/system-variables
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-body-medium);
+
+  // Reset the user agent margin.
+  margin: 0;
+}
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
